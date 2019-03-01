@@ -55,6 +55,14 @@ public class DemoController
 	   return "hello";
    }
    
+   @GetMapping("/hello")
+   public String he() 
+   {
+	   //throw new UserNotExistException("1");
+	   System.out.println("execute hello method");
+	   return "hello";
+   }
+   
    @GetMapping("/hello/world/{id}")
    public String hello11(@PathVariable String id) 
    {
