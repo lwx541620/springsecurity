@@ -15,7 +15,7 @@ import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.validate.code.ImageCode;
 import com.imooc.security.core.validate.code.ValidateCodeGenerator;
 
-@Component("imageCodeGenerator")
+//@Component("imageCodeGenerator")
 public class DemoImageCodeGenerator implements ValidateCodeGenerator {
 
 	 private Logger logger=LoggerFactory.getLogger(getClass());

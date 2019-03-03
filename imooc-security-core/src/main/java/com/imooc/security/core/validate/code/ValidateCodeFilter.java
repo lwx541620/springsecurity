@@ -44,11 +44,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 	{
 		super.afterPropertiesSet();
 		String[] configUrls=StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(), ",");
-		for(String configUrl:configUrls) 
+		if(configUrls!=null && configUrls.length>0) 
 		{
-			urls.add(configUrl);
+			for(String configUrl:configUrls) 
+			{
+				urls.add(configUrl);
+			}
+			urls.add("/authentication/form");
 		}
-		urls.add("/authentication/form");
+		
 	}
 	
 	@Override
