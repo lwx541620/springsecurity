@@ -1,8 +1,9 @@
 package com.imooc.security.core.validate.code;
 
-import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.context.request.ServletWebRequest;
 
 public interface ValidateCodeGenerator 
 {
-	public ImageCode generate(HttpServletRequest request);
+	public ValidateCode generate(ServletWebRequest request);
 }

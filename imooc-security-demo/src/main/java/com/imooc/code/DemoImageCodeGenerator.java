@@ -11,9 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.context.request.ServletWebRequest;
+
 import com.imooc.security.core.properties.SecurityProperties;
-import com.imooc.security.core.validate.code.ImageCode;
+import com.imooc.security.core.validate.code.ValidateCode;
 import com.imooc.security.core.validate.code.ValidateCodeGenerator;
+import com.imooc.security.core.validate.code.image.ImageCode;
 
 //@Component("imageCodeGenerator")
 public class DemoImageCodeGenerator implements ValidateCodeGenerator {
@@ -23,7 +26,7 @@ public class DemoImageCodeGenerator implements ValidateCodeGenerator {
 	 @Autowired
 	 private SecurityProperties securityProperties;	
      @Override
-	 public ImageCode generate(HttpServletRequest request) 
+	 public ImageCode generate(ServletWebRequest request) 
 	 {
     	logger.info("execute.11111");
     	logger.info("execute.11111");
@@ -31,8 +34,8 @@ public class DemoImageCodeGenerator implements ValidateCodeGenerator {
     	logger.info("execute.11111");
     	logger.info("execute.11111");
     	logger.info("execute.11111");
-		int width=ServletRequestUtils.getIntParameter(request, "width", securityProperties.getCode().getImage().getWidth());
-		int height=ServletRequestUtils.getIntParameter(request, "height",securityProperties.getCode().getImage().getHeight());
+		int width=ServletRequestUtils.getIntParameter(request.getRequest(), "width", securityProperties.getCode().getImage().getWidth());
+		int height=ServletRequestUtils.getIntParameter(request.getRequest(), "height",securityProperties.getCode().getImage().getHeight());
 		BufferedImage image=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 		Graphics g = image.getGraphics();
 		Random random=new Random();
@@ -78,4 +81,6 @@ public class DemoImageCodeGenerator implements ValidateCodeGenerator {
 			int b=fc+random.nextInt(bc-fc);
 			return new Color(r,g,b);
 		}
+
+		
 }

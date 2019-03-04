@@ -1,35 +1,27 @@
 package com.imooc.security.core.validate.code;
 
-import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 
-public class ImageCode 
+public class ValidateCode 
 {
-    private BufferedImage image;
-   
     private String code;
    
     private LocalDateTime expireTime;
     
-    public ImageCode() {}
+    public ValidateCode() {}
     
-    public ImageCode(BufferedImage image,String code,int expireIn)
+    public ValidateCode(String code,LocalDateTime expireTime)
     {
-    	this.image=image;
+    	this.code=code;
+    	this.expireTime=expireTime;
+    }
+    
+    public ValidateCode(String code,int expireIn)
+    {
     	this.code=code;
     	this.expireTime=LocalDateTime.now().plusSeconds(expireIn);
     }
 
-	public BufferedImage getImage() 
-	{
-		return image;
-	}
-	
-	public void setImage(BufferedImage image) 
-	{
-		this.image = image;
-	}
-	
 	public String getCode() 
 	{
 		return code;
@@ -54,9 +46,11 @@ public class ImageCode
 	{
 		return LocalDateTime.now().isAfter(this.expireTime);	
 	}
+
 	@Override
 	public String toString() 
 	{
-		return "ImageCode [image=" + image + ", code=" + code + ", expireTime=" + expireTime + "]";
+		return "SmsCode [code=" + code + ", expireTime=" + expireTime + "]";
 	}
+	
 }

@@ -23,6 +23,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.image.ImageCode;
 
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean
 {
@@ -85,7 +86,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
 	private void validate(ServletWebRequest request) throws ServletRequestBindingException 
 	{
-		ImageCode codeInSession=(ImageCode) sessionStrategy.getAttribute(request, ValidateCodeController.SESSION_KEY);
+		ImageCode codeInSession=(ImageCode) sessionStrategy.getAttribute(request, ValidateCodeProcessor.SESSION_KEY_PREFIX);
 		String codeInRequest=ServletRequestUtils.getStringParameter(request.getRequest(), "imageCode");
 		if(StringUtils.isBlank(codeInRequest)) 
 		{
@@ -97,14 +98,14 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 		}
 		if(codeInSession.isExpried()) 
 		{
-			sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY);
+			sessionStrategy.removeAttribute(request, ValidateCodeProcessor.SESSION_KEY_PREFIX);
 			throw new ValidateCodeException("验证码已过期");	
 		}
 		if(!StringUtils.equalsIgnoreCase(codeInSession.getCode(), codeInRequest)) 
 		{
 			throw new ValidateCodeException("验证码不匹配");	
 		}
-		sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY);
+		sessionStrategy.removeAttribute(request, ValidateCodeProcessor.SESSION_KEY_PREFIX);
 	}
 
 	public AuthenticationFailureHandler getAuthenticationFailureHandler() 

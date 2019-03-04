@@ -1,4 +1,4 @@
-package com.imooc.security.core.validate.code;
+package com.imooc.security.core.validate.code.image;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,7 +7,10 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.context.request.ServletWebRequest;
+
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.ValidateCodeGenerator;
 
 
 public class ImageCodeGenerator implements ValidateCodeGenerator
@@ -15,10 +18,10 @@ public class ImageCodeGenerator implements ValidateCodeGenerator
     private SecurityProperties securityProperties;
 	
     @Override
-	public ImageCode generate(HttpServletRequest request) 
+	public ImageCode generate(ServletWebRequest request) 
 	{
-		int width=ServletRequestUtils.getIntParameter(request, "width", securityProperties.getCode().getImage().getWidth());
-		int height=ServletRequestUtils.getIntParameter(request, "height",securityProperties.getCode().getImage().getHeight());
+		int width=ServletRequestUtils.getIntParameter(request.getRequest(), "width", securityProperties.getCode().getImage().getWidth());
+		int height=ServletRequestUtils.getIntParameter(request.getRequest(), "height",securityProperties.getCode().getImage().getHeight());
 		BufferedImage image=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 		Graphics g = image.getGraphics();
 		Random random=new Random();
