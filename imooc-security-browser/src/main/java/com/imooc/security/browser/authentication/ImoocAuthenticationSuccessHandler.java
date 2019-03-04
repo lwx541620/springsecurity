@@ -11,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import com.imooc.security.core.LoginType;
+
+import com.imooc.security.core.properties.LoginResponseType;
 import com.imooc.security.core.properties.SecurityProperties;
 
 @Component("imoocAuthenticationSuccessHandler")
@@ -29,7 +30,7 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 			Authentication authentication) throws IOException, ServletException 
 	{
 		logger.info("登录成功");
-		if(LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) 
+		if(LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginType())) 
 		{
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(authentication));
