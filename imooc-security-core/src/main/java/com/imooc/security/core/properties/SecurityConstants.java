@@ -30,6 +30,11 @@ public interface SecurityConstants
 	 * @see SecurityController
 	 */
 	String DEFAULT_SIGN_IN_PAGE_URL = "/imooc-signIn.html";
+	
+	String DEFAULT_LOGIN_PROCESSING_URL_FORM = "/authentication/form";
+	
+	String DEFAULT_LOGIN_PROCESSING_URL_MOBILE = "/authentication/mobile";
+	
 	/**
 	 * 验证图片验证码时，http请求中默认的携带图片验证码信息的参数的名称
 	 */

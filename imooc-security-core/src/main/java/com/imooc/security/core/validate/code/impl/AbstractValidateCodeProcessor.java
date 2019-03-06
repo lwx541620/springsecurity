@@ -5,10 +5,15 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 import com.imooc.security.core.validate.code.ValidateCode;
+import com.imooc.security.core.validate.code.ValidateCodeException;
 import com.imooc.security.core.validate.code.ValidateCodeGenerator;
 import com.imooc.security.core.validate.code.ValidateCodeProcessor;
+import com.imooc.security.core.validate.code.ValidateCodeRepository;
+import com.imooc.security.core.validate.code.ValidateCodeType;
 
 
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor 
@@ -76,7 +81,6 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 	 * @param validateCode
 	 * @throws Exception
 	 */
-	protected abstract void send(ServletWebRequest request, C validateCode) throws Exception;	
-
+	protected abstract void send(ServletWebRequest request, C validateCode) throws Exception;
 }
 

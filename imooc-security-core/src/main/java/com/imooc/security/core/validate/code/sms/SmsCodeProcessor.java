@@ -25,4 +25,11 @@ public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode
 		smsCodeSender.send(mobile, validateCode.getCode());
 	}
 
+	@Override
+	public void validate(ServletWebRequest servletWebRequest) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

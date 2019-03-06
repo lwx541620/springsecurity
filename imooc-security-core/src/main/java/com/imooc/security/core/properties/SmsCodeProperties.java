@@ -3,7 +3,7 @@ package com.imooc.security.core.properties;
 public class SmsCodeProperties 
 {
     
-    private int length=4;
+    private int length=6;
     private int expireIn=60;
     private String url;
 	
